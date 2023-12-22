@@ -3,33 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frequesntly Asked</title>
-
-    <!-- Additional Styles (if needed) -->
-    <style>
-      /* Add your additional styles here */
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-      }
-
-      h1 {
-        color: #333;
-      }
-
-      /* Add more styles as needed */
-    </style>
+    <title>Frequently Asked</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked@2.1.3"></script>
   </head>
   <body>
-    <!-- Include the Content from Your Markdown File -->
-    <div id="content-container">
-      <!-- Use an iframe to include the Markdown file content -->
-      <iframe
-        src="./faq.md"
-        frameborder="0"
-        width="100%"
-        height="100%"
-      ></iframe>
-    </div>
+    <!-- Your content will be dynamically loaded here -->
+    <div id="markdown-content"></div>
   </body>
 </html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // URL to your Markdown file
+    var markdownFileUrl = "./faq.md";
+
+    // Target element where Markdown content will be rendered
+    var markdownContainer = document.getElementById("markdown-content");
+
+    // Fetch and render the Markdown file
+    fetch(markdownFileUrl)
+      .then((response) => response.text())
+      .then((markdownText) => {
+        // Use marked.js to render the Markdown content
+        markdownContainer.innerHTML = marked(markdownText);
+      })
+      .catch((error) => console.error("Error fetching Markdown file:", error));
+  });
+</script>
